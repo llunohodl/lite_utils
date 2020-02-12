@@ -45,7 +45,6 @@ Add `#include "lite_utils.h"` to application code
 
 Set time interval
 ```c
-...
 /* Set timer time */
 StimerSet(St_Test,100);
 ...
@@ -56,7 +55,6 @@ if(StimerTest(St_Test)){
   /*set time to next call of this block*/
   StimerSet(St_Test,150);
 }
-...
 ```
 
 Pereodic function process
@@ -70,7 +68,6 @@ if(StimerPeriod(St_Test,100)){
     StimerSet(St_Test,200);
   }
 }
-...
 ```
 
 Make some actions before time elapsed
@@ -86,7 +83,7 @@ if( (time_window_fl==0) && (50<cur_time) && (cur_time<60)){
 }
 if(StimerTest(St_Test,100)){
   /*actions (after time elapsed)*/
-  time_window_fl=1;
+  time_window_fl=0;
 }
 ```
 
@@ -114,7 +111,7 @@ Get element from fifo
 ```c
 example_t Ex_El_in;
 ...
-if(fifo_put(&Example_fifo,&Ex_El_in)==0){
+if(fifo_get(&Example_fifo,&Ex_El_in)==0){
   if(Ex_El_in.ID==10){
     /* actions for ID 10 */
   }

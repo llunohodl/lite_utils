@@ -152,6 +152,6 @@ void fifo_bin_flash(fifo_bin_t* fifo);
 //get data count in fifo
 //fifo - pointer to fifo data structure
 //return - number of bytes in fifo
-fifo_bin_index_t fifo_bin_count(fifo_t* fifo);
+fifo_bin_index_t fifo_bin_count(fifo_bin_t* fifo);
 
 #endif //_LITE_UTILS_H_
