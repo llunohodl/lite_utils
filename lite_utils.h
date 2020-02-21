@@ -54,7 +54,7 @@ typedef struct{
 //Define byte fifo
 #define fifo_def(name,qty,size)\
 uint8_t name##_buf[qty*size];\
-fifo_t name = {.NewI=0,.OldI=0,.Count=0,.Total_SZ=qty,.Elem_SZ=size,.Buffer=name##_buf};
+fifo_t name = {.NewI=0,.OldI=0,.Count=0,.Total_SZ=qty*size,.Elem_SZ=size,.Buffer=name##_buf};
 
 //FIFO initialization
 //fifo - pointer to fifo data structure
