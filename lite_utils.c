@@ -38,7 +38,7 @@ void StimerDelay(stimer_t Time_ticks){
   #endif
 }
 
-void lite_utils_isr_tick(){
+void Stimer_isr_tick(){
   for(uint8_t i=0; i<_St_QTY+1; i++){
     if(Stimer[i]!=0) Stimer[i]--;
   }
