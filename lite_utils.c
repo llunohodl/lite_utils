@@ -98,7 +98,7 @@ int8_t fifo_put(fifo_t* fifo, uint8_t* element){
   if(fifo->NewI>=fifo->Total_SZ){
      fifo->NewI=0;
   }
-  fifo->Count+=fifo->Elem_SZ;
+  fifo->Count=fifo->Count+fifo->Elem_SZ;
   if(fifo->Count>fifo->Total_SZ){
     fifo->Count=fifo->Total_SZ;
     fifo_sem_release(fifo);
@@ -122,7 +122,7 @@ int8_t fifo_get(fifo_t* fifo, uint8_t* element){
   if(fifo->OldI>=fifo->Total_SZ){
      fifo->OldI=0;
   }
-  fifo->Count-=fifo->Elem_SZ;
+  fifo->Count=fifo->Count-fifo->Elem_SZ;
   fifo_sem_release(fifo);
   return 0;
 }
@@ -197,7 +197,7 @@ int8_t fifo_bin_put_byte(fifo_bin_t* fifo, uint8_t byte){
   if(fifo->NewI >= fifo->Total_SZ){
      fifo->NewI=0;
   }
-  fifo->Count++;
+  fifo->Count=fifo->Count+1;
   if(fifo->Count > fifo->Total_SZ){
      fifo->Count=fifo->Total_SZ;
      return -1;
@@ -214,7 +214,7 @@ int8_t fifo_bin_get_byte(fifo_bin_t* fifo, uint8_t* byte){
   if(fifo->OldI >= fifo->Total_SZ){
      fifo->OldI=0;
   }
-  fifo->Count--;
+  fifo->Count=fifo->Count-1;
   return 0;
 }
 
