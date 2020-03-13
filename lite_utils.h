@@ -103,6 +103,23 @@ void fifo_flash(fifo_t* fifo);
 //return - number of elements in fifo
 fifo_bin_index_t fifo_count(fifo_t* fifo);
 
+//take fifo dump
+//fifo - pointer to fifo data structure
+//addr - address for manipulate with dump
+int8_t fifo_ini_dump(fifo_t* fifo, fifo_index_t* addr);
+
+//take element from fifo dump
+//fifo - pointer to fifo data structure
+//element - pointer to element
+//addr - address for get element (auto update to next element)
+int8_t fifo_take_dump(fifo_t* fifo, uint8_t* element, fifo_index_t* addr);
+
+//modify elsement fifo dump
+//fifo - pointer to fifo data structure
+//element - pointer to element
+//addr - address for set element
+int8_t fifo_mod_dump(fifo_t* fifo, uint8_t* element, fifo_index_t addr);
+
 //FIFO for bytes
 //FIFO for bytes data structure
 typedef struct{

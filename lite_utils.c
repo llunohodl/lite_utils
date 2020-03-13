@@ -160,6 +160,59 @@ int8_t fifo_take(fifo_t* fifo, uint8_t* element){
   return 0;
 }
 
+//take fifo dump
+//fifo - pointer to fifo data structure
+//addr - address for manipulate with dump
+int8_t fifo_ini_dump(fifo_t* fifo, fifo_index_t* addr){
+  if(fifo->Count<fifo->Elem_SZ){ //No data blocked
+    return -2;
+  }
+  if(fifo_sem_get(fifo)!=0){
+    return -1;
+  }
+  *addr=fifo->OldI;
+  fifo_sem_release(fifo);
+  return 0;
+}
+
+//take element from fifo dump
+//fifo - pointer to fifo data structure
+//element - pointer to element
+//addr - address for get element (auto update to next element)
+int8_t fifo_take_dump(fifo_t* fifo, uint8_t* element, fifo_index_t* addr){
+  if(fifo->Count<fifo->Elem_SZ){ //No data blocked
+    return -2;
+  }
+  if(fifo_sem_get(fifo)!=0){
+    return -1;
+  }
+  for(fifo_index_t i=0;i<fifo->Elem_SZ;i++){
+    element[i]=fifo->Buffer[*addr];
+    *addr=*addr+1;
+  }
+  if(*addr>=fifo->Total_SZ){
+    *addr=0;
+  }
+  fifo_sem_release(fifo);
+  return 0;
+}
+
+//modify elsement fifo dump
+//fifo - pointer to fifo data structure
+//element - pointer to element
+//addr - address for set element
+int8_t fifo_mod_dump(fifo_t* fifo, uint8_t* element, fifo_index_t addr){
+  if(fifo_sem_get(fifo)!=0){
+    return -1;
+  }
+  for(fifo_index_t i=0;i<fifo->Elem_SZ;i++){
+    fifo->Buffer[addr]=element[i];
+    addr=addr+1;
+  }
+  fifo_sem_release(fifo);
+  return 0;
+}
+
 //delete last element from fifo 
 //fifo - pointer to fifo data structure
 int8_t fifo_release(fifo_t* fifo){
