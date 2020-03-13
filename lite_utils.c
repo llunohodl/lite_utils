@@ -183,6 +183,9 @@ int8_t fifo_take_dump(fifo_t* fifo, uint8_t* element, fifo_index_t* addr){
   if(fifo->Count<fifo->Elem_SZ){ //No data blocked
     return -2;
   }
+  if(*addr==fifo->NewI){
+    return -3;
+  }
   if(fifo_sem_get(fifo)!=0){
     return -1;
   }
