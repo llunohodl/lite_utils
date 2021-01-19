@@ -81,7 +81,7 @@ if( (time_window_fl==0) && (50<cur_time) && (cur_time<60)){
   /*actions (before time elapsed)*/
   time_window_fl=1;
 }
-if(StimerTest(St_Test,100)){
+if(StimerTest(St_Test)){
   /*actions (after time elapsed)*/
   time_window_fl=0;
 }
